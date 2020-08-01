@@ -3,3 +3,34 @@
 //////////////////////////////////////
 
 process.env.PORT = process.env.PORT || 3000;
+
+////////////////////////////////////////
+// Vencimiento de Token
+////////////////////////////////////////
+//60 seg * 60min * 24hs * 5dias
+
+process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 5;
+
+////////////////////////////////////////
+// Seed de autenticacion
+////////////////////////////////////////
+
+process.env.SEED = process.env.SEED || "este-es-el-seed-desarrollo";
+
+////////////////////////////////////////
+// Entorno produccion | dev = desarrollo
+////////////////////////////////////////
+process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
+
+////////////////////////////////////////
+// Coneccion a Base de Datos
+////////////////////////////////////////
+
+let urlDB;
+if (process.env.NODE_ENV === 'dev') {
+    urlDB = "mongodb://localhost:27017/cafe";
+} else {
+    urlDB = "mongodb+srv://admin:JWqUpEZO9qDyt2Ik@cluster0.p2uwc.mongodb.net/cafe";
+}
+
+process.env.URLDB = urlDB;
