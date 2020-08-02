@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const _ = require('underscore');
+const jwt = require('jsonwebtoken');
 
 const Usuario = require('../models/usuario');
 const verificarToken = require("../middlewares/authenticacion");
@@ -67,6 +68,7 @@ app.post('/usuario', (req, res) => {
         password: bcrypt.hashSync(body.password, 10),
     });
 
+
     usuario.save((err, usuarioDB) => {
         if (err) {
             return res.status(400).json({
@@ -74,9 +76,16 @@ app.post('/usuario', (req, res) => {
                 err
             })
         }
+
+        let token = jwt.sign({
+                usuario: usuarioDB,
+            },
+            process.env.SEED, { expiresIn: process.env.CADUCIDAD_TOKEN }
+        );
         res.json({
             ok: true,
-            usuario: usuarioDB
+            usuario: usuarioDB,
+            token
         })
     });
 })

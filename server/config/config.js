@@ -7,9 +7,9 @@ process.env.PORT = process.env.PORT || 3000;
 ////////////////////////////////////////
 // Vencimiento de Token
 ////////////////////////////////////////
-//60 seg * 60min * 24hs * 5dias
+//60 seg * 60min * 3hs
 
-process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 5;
+process.env.CADUCIDAD_TOKEN = 60 * 60 * 3;
 
 ////////////////////////////////////////
 // Seed de autenticacion
